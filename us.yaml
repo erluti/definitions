@@ -368,6 +368,7 @@ methods:
     arguments: date, region
     ruby: |
       if region == "us_ut"
+        raise "it's utah, baby!"
         case date.wday
         when 1
           date
