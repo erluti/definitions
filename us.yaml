@@ -196,7 +196,7 @@ months:
   - name: Juneteenth National Independence Day
     regions: [us]
     mday: 19
-    observed: juneteenth_national_independence_day(date, region)
+    observed: juneteenth_national_independence_day(region, date)
     year_ranges:
       from: 2021
   - name: Emancipation Day in Texas # fixed
@@ -365,9 +365,9 @@ methods:
     # When Saturday or Sunday, it's on next Monday
     # When Tuesday through Friday, it's on the preceeding Monday
     # all other states it's observed like "to_weekday_if_weekend"
-    arguments: date, region
+    arguments: region, date
     ruby: |
-      if region == "us_ut"
+      if region == :us_ut
         case date.wday
         when 1
           date
