@@ -199,6 +199,11 @@ months:
     observed: to_weekday_if_weekend(date)
     year_ranges:
       from: 2021
+  - name: Juneteenth National Freedom Day
+    regions: [us_ut]
+    function: juneteenth_national_freedom_day(year)
+    year_ranges:
+      from: 2022
   - name: Emancipation Day in Texas # fixed
     regions: [us_tx]
     mday: 19
@@ -360,6 +365,22 @@ methods:
       beginning_of_month = Date.civil(year, month, 1)
       king_day = Date.civil(year, month, day_of_holiday)
       king_day.downto(beginning_of_month).find {|date| date if date.wday == 5 }
+  juneteenth_national_freedom_day:
+    # If Saturday or Sunday, it's on next Monday
+    # If it's Tuesday through Friday, it's on the preceeding Monday
+    arguments: year
+    ruby: |
+      date = Date.civil(year, 6, 19)
+      case date.wday
+      when 1
+        date
+      when 2,3,4,5
+        date - (date.wday - 1)
+      when 6
+        date + 2
+      when 0
+        date + 1
+      end
   election_day:
     # Tuesday after the first Monday of November
     arguments: year
@@ -706,7 +727,13 @@ tests:
       date: ['2017-6-19']
       regions: ["us_tx"]
     expect:
-      name: "Emancipation Day in Texas"
+      name: "Emancipation Day in Texas"  
+  - given:
+      date: ['2024-06-17', '2027-06-21', '2028-06-19', '2033-06-20']
+      regions: ["us_ut"]
+    expect:
+      name: "Juneteenth National Freedom Day"
+
 
   - given:
       date: ['2017-6-20', '2020-6-19', '2021-6-21']
