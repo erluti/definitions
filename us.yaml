@@ -729,16 +729,10 @@ tests:
     expect:
       name: "Emancipation Day in Texas"  
   - given:
-      date: ['2024-06-17', '2027-06-21', '2033-06-20']
+      date: ['2024-06-17', '2027-06-21', '2028-06-19', '2033-06-20']
       regions: ["us_ut"]
     expect:
       name: "Juneteenth National Freedom Day"
-  - given:
-      date: ['2028-06-19']
-      regions: ["us_ut"]
-    expect:
-      name: ["Juneteenth National Freedom Day", "Juneteenth National Independence Day"]
-
 
   - given:
       date: ['2017-6-20', '2020-6-19', '2021-6-21']
