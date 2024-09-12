@@ -367,7 +367,7 @@ methods:
     # all other states it's observed like "to_weekday_if_weekend"
     arguments: date, region
     ruby: |
-      if region == 'us_ut'
+      if region == "us_ut"
         case date.wday
         when 1
           date
@@ -385,7 +385,6 @@ methods:
       else
         date
       end
-
   election_day:
     # Tuesday after the first Monday of November
     arguments: year
